@@ -1,11 +1,26 @@
 "use client";
+import axios from "axios";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { BiSolidRightArrow } from "react-icons/bi";
 
 export default function Home() {
   const [query, setQuery] = useState<string>("");
-
+  const [loading, setLoading] = useState(false);
+  const onSubmit = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.post("/api/getdata", { query });
+      console.log("login response is", data);
+      //  toast.success(JSON.stringify(data));
+      //  router.push(`/profile/${data.user._id}`);
+    } catch (error: any) {
+      //  toast.error(error.message);
+      console.log(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-gray-100">
       <div className="bg-white rounded-lg p-4 shadow-lg max-w-xl w-full">
@@ -25,7 +40,10 @@ export default function Home() {
             // style={{ height: query.length > 300 ? "10rem" : "4rem" }} // Dynamically adjust the height based on content
           />
 
-          <button className="absolute bottom-4 flex items-center text-lg md:text-2xl right-4 md:bottom-3 text-gray-500 rounded p-2">
+          <button
+            onClick={onSubmit}
+            className="absolute bottom-4 flex items-center text-lg md:text-2xl right-4 md:bottom-3 text-gray-500 rounded p-2"
+          >
             <BiSolidRightArrow />
           </button>
         </div>
