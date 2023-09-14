@@ -7,7 +7,9 @@ import { BiSolidRightArrow } from "react-icons/bi";
 export default function Home() {
   const [query, setQuery] = useState<string>("");
   const [loading, setLoading] = useState(false);
+  const [visiblity, setvisiblity] = useState(false);
   const onSubmit = async () => {
+    setvisiblity(true);
     try {
       setLoading(true);
       const { data } = await axios.post("/api/getdata", { query });
@@ -22,8 +24,9 @@ export default function Home() {
     }
   };
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-gray-100">
-      <div className="bg-white rounded-lg p-4 shadow-lg max-w-xl w-full">
+    <main className="flex min-h-screen flex-col items-center justify-between  bg-gray-100">
+      <div className="bg-white rounded-lg p-4 h-screen shadow-lg  w-screen">
+        <div className="text-gray-900 bg-white">{visiblity && query}</div>
         <div className="text-gray-800">Output</div>
       </div>
       <div className="flex w-[90%] sm:w-[80%] lg:w-[50%] h-auto absolute bottom-9 z-20 py-2  items-center">
