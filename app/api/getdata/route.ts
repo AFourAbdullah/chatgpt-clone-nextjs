@@ -8,9 +8,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
     console.log("body is", reqBody);
     const { query } = reqBody;
     console.log("body is", query);
-    const completion = await openai.completions.create({
-      model: "davinci-002",
-      prompt: query,
+    const completion = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [{ role: "user", content: query }],
     });
     return NextResponse.json({
       message: "Data fetched successfully!",
