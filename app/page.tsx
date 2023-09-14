@@ -30,10 +30,18 @@ export default function Home() {
     }
   };
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between  w-screen">
-      <div className="bg-white rounded-lg p-4 h-screen shadow-lg w-full ">
+    <main className="flex overflow-x-hidden min-h-screen flex-col items-center justify-between  w-screen">
+      <div className="w-full h-[60px]  gap-4 justify-center flex items-center bg-green-950">
+        <img
+          src="/logo.png"
+          alt=""
+          className="w-[50px] h-[50px] object-cover"
+        />
+        <h2 className="text-white text-2xl font-bold">ChatGpt</h2>
+      </div>
+      <div className="bg-white rounded-lg  h-screen shadow-lg w-full ">
         {visiblity && (
-          <div className="text-gray-900 bg-gray-300 py-4 px-3 text-center">
+          <div className="text-gray-900 h-max bg-gray-300 py-4 px-3 text-center">
             {prevquery}
           </div>
         )}
