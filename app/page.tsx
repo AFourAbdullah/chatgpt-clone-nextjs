@@ -10,6 +10,12 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [visiblity, setvisiblity] = useState(false);
   const [output, setoutput] = useState(false);
+  const handleKeyPress = (event: any) => {
+    if (event.key === "Enter") {
+      // Handle the Enter key press
+      onSubmit();
+    }
+  };
   const onSubmit = async () => {
     setvisiblity(true);
     setQuery("");
@@ -59,6 +65,7 @@ export default function Home() {
             rows={query.length > 200 ? 9 : 1}
             className="m-0  h-full  w-full border-2 border-black/1- focus:outline-none bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700 rounded-xl shadow-2xl dark:shadow-xs p-3"
             placeholder="Search..."
+            onKeyDown={handleKeyPress}
             value={query}
             onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
               setQuery(e.target.value)
